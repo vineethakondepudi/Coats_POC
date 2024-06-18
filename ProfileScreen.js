@@ -1,9 +1,9 @@
 import { jwtDecode } from "jwt-decode";
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button } from "react-native";
 import { Avatar, Card, Divider, IconButton } from "react-native-paper";
 
-const ProfileScreen = ({ route }) => {
+const ProfileScreen = ({ route}) => {
   const { token } = route.params;
   const decoded = jwtDecode(token)
   console.log(decoded, "decode");
@@ -16,34 +16,38 @@ const ProfileScreen = ({ route }) => {
       <ImageBackground
         source={image}
         style={{ position: "absolute", width: "100%", height: "100%" }}
-      ></ImageBackground>
-      <Avatar.Image
-        size={120}
-        source={{
-          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpC01ITIIRhKRmGdonCwoEmFHMmKWYWrs6HfjsceLWlCaZWsjB", // Replace with actual image URL
-        }}
-      />
-      <Card style={styles.card}>
-        <Card.Content>
-          <Text style={styles.header}>{decoded.name.toUpperCase()}</Text>
-          <Text style={styles.subHeader}>Software Engineer</Text>
-          <Divider style={styles.divider} />
-          {/* <IconButton icon="email" size={20} /> */}
-          <Text style={styles.info}>
-            <b>Email: </b>
-            {decoded.email}
-          </Text>
-          <Text style={styles.info}>
-            <b>App Name: </b>
-            {decoded.app_displayname}
-          </Text>
-          <Text style={styles.info}>
-            <b>Unique Name: </b>
-            {decoded.unique_name
-            }
-          </Text>
-        </Card.Content>
-      </Card>
+      >
+        <View style={styles.overlay}>
+          <Avatar.Image
+            size={120}
+            source={{
+              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpC01ITIIRhKRmGdonCwoEmFHMmKWYWrs6HfjsceLWlCaZWsjB",
+            }}
+          />
+          <Card style={styles.card}>
+            <Card.Content>
+              <Text style={styles.header}>{decoded.name.toUpperCase()}</Text>
+              {/* <Text style={styles.subHeader}>Software Engineer</Text> */}
+              <Divider style={styles.divider} />
+              <Text style={styles.info}>
+                <Text style={styles.label}>Email: </Text>
+                Abhishek-in@sykmss.onmicrosoft.com
+              </Text>
+              <Text style={styles.info}>
+                <Text style={styles.label}>App Name: </Text>
+                {decoded.app_displayname}
+              </Text>
+              {/* <Text style={styles.info}>
+                <Text style={styles.label}>Unique Name: </Text>
+                {decoded.unique_name}
+              </Text> */}
+            </Card.Content>
+          </Card>
+          <View style={styles.button}>
+                <Button style={styles.button} title='Sign Out' onPress={() => navigation.navigate('login')}></Button>
+              </View>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -53,16 +57,22 @@ export default ProfileScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  image: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  overlay: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     padding: 20,
-     // Light background color
+
   },
   card: {
     width: "90%",
     padding: 20,
     marginTop: 20,
-    backgroundColor: "#edebf0",
   },
   header: {
     fontSize: 24,
@@ -83,8 +93,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginBottom: 8,
   },
-  image: {
-    flex: 1,
-    justifyContent: "center",
+  label: {
+    fontWeight: "bold",
+  },
+  button: {
+  
+    alignItems: 'center',
+    justifyContent: 'center',
+    top:40
   },
 });
