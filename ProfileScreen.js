@@ -1,12 +1,27 @@
+
 import { jwtDecode } from "jwt-decode";
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground, Button } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button,Linking } from "react-native";
 import { Avatar, Card, Divider, IconButton } from "react-native-paper";
-
-const ProfileScreen = ({ route}) => {
-  const { token } = route.params;
+const ProfileScreen = ({navigation, route}) => {
+  const { token } = route.params ;
+ 
   const decoded = jwtDecode(token)
-  console.log(decoded, "decode");
+
+  
+
+  const signOut = async () => {
+    const logoutUrl = 'https://login.microsoftonline.com/5da39af2-99ce-4f1d-af28-3ecd54d27a5c/oauth2/v2.0/logout?post_logout_redirect_uri=http://localhost:8081';
+      // Linking.openURL(logoutUrl);
+      window.location.href = logoutUrl;
+      // navigation.navigate('login')
+    
+  };
+
+  const ResetPassword =async ()=>{
+    const resetUrl='https://passwordreset.microsoftonline.com/?redirect_uri=http://localhost:8081'
+    Linking.openURL(resetUrl)
+  }
   const image = {
     uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKyUA5Gu8aqtrI6eZkQhmo-KT93kIryUQhsQ&s",
   };
@@ -43,8 +58,13 @@ const ProfileScreen = ({ route}) => {
               </Text> */}
             </Card.Content>
           </Card>
-          <View style={styles.button}>
-                <Button style={styles.button} title='Sign Out' onPress={() => navigation.navigate('login')}></Button>
+          <View style={styles.butn}>
+    
+                {/* <Button color="red" style={styles.button} title='Sign Out' onPress={() => navigation.navigate('login')}></Button> */}
+                {/* <Button title='Sign Out' onPress={()=>navigation.navigate('login')} ></Button> */}
+
+                <Button title='Sign Out' onPress={signOut} />
+                <Button title='ResetPassword' onPress={ResetPassword} />
               </View>
         </View>
       </ImageBackground>
@@ -100,6 +120,21 @@ const styles = StyleSheet.create({
   
     alignItems: 'center',
     justifyContent: 'center',
-    top:40
+    top:40,
+   
+
   },
+  resetbutton: {
+  
+    alignItems: 'center',
+    justifyContent: 'center',
+    top:40,
+   left:'20'
+
+   
+    
+  },
+  butn :{
+    marginTop:20
+  }
 });
