@@ -3,7 +3,7 @@ name: coats CI/CD workflow
 on:
   push:
     branches:
-      - latest(June25)
+      - main
 
 jobs:
   build:
