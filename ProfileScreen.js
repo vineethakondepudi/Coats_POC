@@ -12,7 +12,7 @@ const ProfileScreen = ({navigation, route}) => {
   
 
   const signOut = async () => {
-    const logoutUrl = 'https://login.microsoftonline.com/5da39af2-99ce-4f1d-af28-3ecd54d27a5c/oauth2/v2.0/logout?post_logout_redirect_uri=https://reactnativeapp-thwbomyt3a-uc.a.run.app';
+    const logoutUrl = 'https://login.microsoftonline.com/5da39af2-99ce-4f1d-af28-3ecd54d27a5c/oauth2/v2.0/logout?post_logout_redirect_uri=https://reactnative-coatsapp-thwbomyt3a-uc.a.run.app';
       // Linking.openURL(logoutUrl);
       window.location.href = logoutUrl;
       // navigation.navigate('login')
