@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme":["myapp"],
+    "scheme": ["myapp"],
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -29,6 +29,9 @@
       "eas": {
         "projectId": "34c6418f-6c85-4c68-bf0a-d28bb437edba"
       }
-    }
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
   }
 }
