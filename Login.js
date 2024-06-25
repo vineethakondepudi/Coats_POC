@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import { Avatar } from "react-native-paper";
 
+
 WebBrowser.maybeCompleteAuthSession();
 
 export default function LoginComponent({ navigation }) {
@@ -60,6 +61,7 @@ export default function LoginComponent({ navigation }) {
           discovery
         )
           .then((res) => {
+  
             setToken(res.accessToken);
           })
           .catch((error) => {

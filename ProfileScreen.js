@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode";
 import React from "react";
 import { StyleSheet, Text, View, ImageBackground, Button,Linking } from "react-native";
 import { Avatar, Card, Divider, IconButton } from "react-native-paper";
+import * as SecureStore from 'expo-secure-store';
 const ProfileScreen = ({navigation, route}) => {
   const { token } = route.params ;
  
@@ -11,17 +12,21 @@ const ProfileScreen = ({navigation, route}) => {
   
 
   const signOut = async () => {
-    const logoutUrl = 'https://login.microsoftonline.com/5da39af2-99ce-4f1d-af28-3ecd54d27a5c/oauth2/v2.0/logout?post_logout_redirect_uri=http://localhost:8081';
+    const logoutUrl = 'https://login.microsoftonline.com/5da39af2-99ce-4f1d-af28-3ecd54d27a5c/oauth2/v2.0/logout?post_logout_redirect_uri=https://reactnativeapp-thwbomyt3a-uc.a.run.app';
       // Linking.openURL(logoutUrl);
       window.location.href = logoutUrl;
       // navigation.navigate('login')
-    
-  };
 
+    }
+      
+    
+    
+  
   const ResetPassword =async ()=>{
     const resetUrl='https://passwordreset.microsoftonline.com/?redirect_uri=http://localhost:8081'
     Linking.openURL(resetUrl)
   }
+
   const image = {
     uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKyUA5Gu8aqtrI6eZkQhmo-KT93kIryUQhsQ&s",
   };
@@ -58,14 +63,27 @@ const ProfileScreen = ({navigation, route}) => {
               </Text> */}
             </Card.Content>
           </Card>
-          <View style={styles.butn}>
-    
-                {/* <Button color="red" style={styles.button} title='Sign Out' onPress={() => navigation.navigate('login')}></Button> */}
-                {/* <Button title='Sign Out' onPress={()=>navigation.navigate('login')} ></Button> */}
-
-                <Button title='Sign Out' onPress={signOut} />
-                <Button title='ResetPassword' onPress={ResetPassword} />
-              </View>
+ 
+              <View style={styles.buttonContainer}>
+            <View style={styles.buttonWrapper}>
+              {/* <Button
+                title="Sign Out"
+                color="#FF0000" // Red color for the logout button
+                onPress={signOut} 
+              /> */}
+                  <Button
+                title="Reset Password"
+                onPress={ResetPassword}
+              />
+            </View>
+            <View style={styles.buttonWrapper}>
+                     <Button
+                title="Sign Out"
+                color="#FF0000" // Red color for the logout button
+                onPress={signOut} 
+              />
+            </View>
+          </View>
         </View>
       </ImageBackground>
     </View>
@@ -136,5 +154,19 @@ const styles = StyleSheet.create({
   },
   butn :{
     marginTop:20
-  }
+  },
+  // style={styles.buttonWrapper}
+  buttonContainer: {
+    top: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius:20
+  },
+  buttonWrapper: {
+    marginHorizontal: 10, 
+  },
+  signOutButton: {
+    backgroundColor: "#FF0000", // Red color
+  },
 });
