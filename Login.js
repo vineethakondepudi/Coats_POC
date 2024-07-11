@@ -28,7 +28,7 @@ export default function LoginComponent({ navigation }) {
   );
   const redirectUri = makeRedirectUri({
     scheme: "myapp",
-    path: "https://reactnative-coatsapp-thwbomyt3a-uc.a.run.app",
+    path: "auth",
   });
   const clientId = "99aedfde-1004-4f0d-8bb8-000ed0093190";
 

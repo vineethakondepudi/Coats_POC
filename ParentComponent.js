@@ -3,11 +3,10 @@
 
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useTheme } from "@react-navigation/native";
 import ProfileScreen from './ProfileScreen'
 import Document from "./DocumentScreen";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet } from "react-native";
+
 
 function ParentComponent(props) {
   const [tokenVal, setTokenVal] = React.useState(props.route.params);
@@ -32,17 +31,6 @@ function ParentComponent(props) {
         },
       })}
     >
-      {/* <Tab.Screen
-        name="Document"
-        component={DocumentScreen}
-        options={{ tabBarLabel: "Document" }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        initialParams={{ token: tokenVal }}
-        options={{ tabBarLabel: "Profile" }}
-      /> */}
         <Tab.Screen name="Home" component={Document } options={({ route }) => {
           route.params = { token: tokenVal };
         }} />
